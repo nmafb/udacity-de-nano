@@ -1,0 +1,31 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    container_name: "postgres"
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - /Users/nuno.bretes/Documents/__Meus/_Projectos/git/udacity-de-nano/postgres
+    restart: always
+    #networks:
+    #  - postgres-compose-network
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres-data:
+
+#networks: 
+#  postgres-compose-network:
+#    driver: bridge
