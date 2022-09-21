@@ -4,12 +4,12 @@
 The purpose of this database is to get information about Saprkify songs and their users activity on their streaming app.
 The main reason is to find out what songs are being listened by the users.
 
-## How to Run Python scripts
+### How to Run Python scripts
 With python installed, open a terminal with in the local folder of the file and execute:
 * <code>python3 create_tables.py</code>
 * <code>python3 etl.py</code>
 
-## Files in the repository
+### Files in the repository
 * sql_queries.py   
     -> All the scripts needed to Create/Drop the tables, Insert statements and query
 
@@ -26,7 +26,7 @@ With python installed, open a terminal with in the local folder of the file and 
 * test.ipynb
     -> Jupyter notebook with the queries to the tables to validate that all the tables have the correct rows.
     
-## Database Schema Design
+### Database Schema Design
 
 The schema design is composed by 1 fact table (songplays) that holds the information about the usage of the songs from the Saprkyfi users.
 This fact table is characterized by 4 dimension tables, that gives the detail of the Users, Artists, Songs and Time.
@@ -74,8 +74,5 @@ The ETL process is the main responsable for the extraction and transformation of
 
 
 
-### Data Modeling with Apache Cassandra
-### Data Warehouse
-### Data Lake
-### Data Pipelines
-### Data Engineering Capstone Project
+## Data Modeling with Apache Cassandra
+
