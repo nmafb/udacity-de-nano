@@ -4,8 +4,19 @@ import psycopg2
 import pandas as pd
 from sql_queries import *
 
-''' Process responsable for reading the json song raw data file, tranforms and inserts the needed columns for the Songs and Artists tables'''
+
 def process_song_file(cur, filepath):
+    ''' 
+        Description: Process responsable for reading the json song raw data file, tranforms and inserts the needed columns for the Songs and Artists tables
+        
+        Arguments: 
+            cur: the cursor object
+            filepath: the song data file path
+            
+        returns:
+            none
+    '''
+    
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -17,8 +28,19 @@ def process_song_file(cur, filepath):
     artist_data = tuple(df[['artist_id', 'artist_name','artist_location', 'artist_latitude', 'artist_longitude']].values[0])
     cur.execute(artist_table_insert, artist_data)
 
-'''Process responsable to to reading the json log file and filter this data (NextSong), transform the data and load for the tables Users, Time and Fact Table Songplays  '''
+
 def process_log_file(cur, filepath):
+    '''
+        Description: Process responsable to to reading the json log file and filter this data (NextSong), transform the data and load for the tables Users, Time and Fact Table Songplays  
+        
+        Arguments: 
+            cur: the cursor object
+            filepath: the log data file path
+            
+        returns:
+            none
+    '''
+    
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -59,8 +81,21 @@ def process_log_file(cur, filepath):
         songplay_data = (pd.to_datetime(row.ts, unit='ms'), row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
-'''Process that recursevely will check if the files exist and extracts them. If so, It calls the Reading procedures above to fill the tables '''
+
 def process_data(cur, conn, filepath, func):
+    '''
+        Description: Process that recursevely will check if the files exist and extracts them. If so, It calls the Reading procedures above to fill the tables 
+
+        Arguments: 
+            cur: the cursor object
+            conn: the connection object
+            filepath: the data file path
+            func: the function to execute
+            
+        returns:
+            none
+    '''
+    
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -78,8 +113,18 @@ def process_data(cur, conn, filepath, func):
         conn.commit()
         print('{}/{} files processed.'.format(i, num_files))
 
-'''Main process that call the process_data function to initiate the extraction, transformation and loading of the tables'''
+
 def main():
+    '''
+        Description: Main process that call the process_data function to initiate the extraction, transformation and loading of the tables
+        
+        Arguments: 
+            none
+            
+        returns:
+            none
+    '''
+    
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 

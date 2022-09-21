@@ -65,7 +65,8 @@ songplay_table_insert = ("insert into songplays (start_time, user_id, level, son
 user_table_insert = ("insert into users (user_id, first_name, last_name, gender, level ) \
                         values (%s, %s, %s, %s, %s )\
                             ON CONFLICT (user_id) \
-                            DO NOTHING; \
+                            DO UPDATE \
+                                SET level = EXCLUDED.level ; \
 ")
 
 song_table_insert = ("insert into songs (song_id, title, artist_id, year, duration) \
