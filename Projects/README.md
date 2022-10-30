@@ -34,4 +34,7 @@ And below is an example of what the data in a log file, 2018-11-12-events.json, 
 
 ![image](https://user-images.githubusercontent.com/24605851/198902466-22cabcd9-2b88-4ea4-bbc0-e47a4cb11564.png)
 
+## Schema for Song Play Analysis
+![image](https://user-images.githubusercontent.com/24605851/198902846-734a07fb-206b-4fbc-8557-b2623c7621f3.png)
+
 
