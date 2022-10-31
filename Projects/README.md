@@ -55,3 +55,17 @@ Defined data structure for DWH analysis:
 
 <code>time</code> - timestamps of records in songplays broken down into specific units</br>
 * <code>start_time, hour, day, week, month, year, weekday</code></br>
+
+## ETL
+The ETL is defined in 3 stages:
+* Staging      - load of staging tables - <code>staging events</code> &nbsp; <code>staging songs</code>
+* Dimension    - trasformation and load of dimensions tables.
+* Fact loading - transformation and load of fact table.
+
+### Pipeline
+0 - Creation of the AWS cluster with the python notebook, assuming that already exists a cluster</br>
+<code>Create_Cluster.ipynb</code></br>
+<code>
+   1 - Creation of the tables structure - Staging, Dimensions and Fact tables </br>
+   2 - Loading of the staging tables
+</code>
