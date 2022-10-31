@@ -114,6 +114,3 @@ Next is made some analysis over the new created model.
 ### Most played Artist by User
 ![image](https://user-images.githubusercontent.com/24605851/198988864-6d42b018-1004-424c-92cd-730a957d55ef.png)
 
-
-
-## Create a AWS Redshift Cluster IAM User/Role
