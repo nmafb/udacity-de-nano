@@ -78,6 +78,7 @@ The following files define the project: </br>
   <li>notebooks                        # Notebooks folder
     <ul>
       <li>Create_Cluster.ipynb</li>    # Create AWS Cluster
+       <li>Sparkify_Analysis.ipynb</li> # Create AWS Cluster
     </ul>
   </li>
   <li>scripts                          # scripts folder
@@ -100,3 +101,17 @@ For this project it was created an AWS IAM User and Role:
 1. Create IAM user (dwhuser)
 2. Create IAM role (dwhRole) with AmazonS3ReadOnlyAccess access rights
 
+# Sparkify Analysis
+Next is made some analysis over the new created model.
+
+### Users that listens more songs
+<code>
+%%sql
+select u.first_name + ' ' + u.last_name as Username, count(distinct s.title)
+from songplays p
+join users u on p.user_id=u.user_id
+join songs s on p.song_id=s.song_id
+group by u.first_name , u.last_name
+order by 2 desc
+limit 10
+</code>
