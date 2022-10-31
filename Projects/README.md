@@ -46,9 +46,12 @@ Defined data structure for DWH analysis:
 ### Dimension Tables
 <code>users</code> - users in the app</br>
 * <code>user_id, first_name, last_name, gender, level</code></br>
+
 <code>songs</code> - songs in music database</br>
 * <code>song_id, title, artist_id, year, duration</code></br>
+
 <code>artists</code> - artists in music database</br>
 * <code>artist_id, name, location, lattitude, longitude</code></br>
+
 <code>time</code> - timestamps of records in songplays broken down into specific units</br>
 * <code>start_time, hour, day, week, month, year, weekday</code></br>
