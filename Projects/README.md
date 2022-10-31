@@ -35,7 +35,10 @@ And below is an example of what the data in a log file, 2018-11-12-events.json, 
 ![image](https://user-images.githubusercontent.com/24605851/198902466-22cabcd9-2b88-4ea4-bbc0-e47a4cb11564.png)
 
 ## Schema for Song Play Analysis
+Defined data structure for DWH analysis:
+
 ![image](https://user-images.githubusercontent.com/24605851/198902913-ac0d5a59-1438-4824-884c-92e73cc24bf5.png)
 
+### Fact Table
 
 
