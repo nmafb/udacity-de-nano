@@ -83,7 +83,17 @@ The following files define the project: </br>
       <li>dwh.cfg</li>                 # file that contains all the configurations needed to connect to the AWS cluster and S3 bucket
       <li>etl.py</li>                  # Main script that cleans all tables, loads the  staging tables and applies the transformations for the dimension and fact tables
        <li>README.md</li>              # File that contains the description of the project
-       <li>sql_queries.py</li>         # File that contains the definition for the cleaning, staging loading and final tables transformation and loading.
+       <li>sql_queries.py</li>         # File that contains the SQL definition for the cleaning, staging loading and final tables transformation and loading.
     </ul>
   </li>
 </ul>
+
+## Create a AWS Redshift Cluster IAM User/Role
+
+This step is very important, as we need it to interact with the AWS Account. 
+It is necessary to edit the <code>dwh.cgf</code> file with your admin credentials from the AWS account.
+
+For this project it was created an AWS IAM User and Role:
+1. Create IAM user (dwhuser)
+2. Create IAM role (dwhRole) with AmazonS3ReadOnlyAccess access rights
+
