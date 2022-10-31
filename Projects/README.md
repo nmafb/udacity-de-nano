@@ -105,7 +105,6 @@ For this project it was created an AWS IAM User and Role:
 Next is made some analysis over the new created model.
 
 ### Users that listens more songs
-<code>
 %%sql </br>
 select u.first_name + ' ' + u.last_name as Username, count(distinct s.title)</br>
 from songplays p</br>
@@ -114,4 +113,4 @@ join songs s on p.song_id=s.song_id</br>
 group by u.first_name , u.last_name</br>
 order by 2 desc</br>
 limit 10</br>
-</code>
+
