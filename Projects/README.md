@@ -86,27 +86,4 @@ The following files define the project: </br>
        <li>sql_queries.py</li>         # File that contains the definition for the cleaning, staging loading and final tables transformation and loading.
     </ul>
   </li>
-  <li>Fourth item</li>
 </ul>
-
-
-. aws-data-warehouse-modeling
-|
-│   README.md                          # Project description and documentation
-│   .gitignore                         # Files and extension ignored in commited
-│   docker-compose.yml                 # Container for several tools
-│   requirements.txt                   # Python requirements and libraries
-└───data                               # Locally data source (files) and generated new files 
-└───resources                          # Project resources (images, others...)
-│     └─── images                      # Images about process
-└───src                                # Source code
-│   └─── notebooks                     # Jupyter notebooks
-│   └─── analysis_aws_data.ipynb       # Jupyter notebook for analysis data
-│   └─── scripts                       # Python code
-│       │__ create_aws_cluster.py      # Python code to create AWS cluster
-│       │__ create_tables.py           # Python code to create database
-│       │__ delete_aws_cluster.py      # Python code to delete AWS cluster
-│       │__ dwh.cfg                    # Configuration file, credentials for AWS account
-│       │__ etl.py                     # Python code to ETL pipeline
-│       └── sql_queries.py             # Python code to SQL Statments
-└──
