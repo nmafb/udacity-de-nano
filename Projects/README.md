@@ -68,3 +68,23 @@ The ETL is defined in 3 stages:
    3 - Loading of the staging tables from AWS S3 bucket</br>
    4 - Data transformation and loading dimension tables</br>
    5 - Data transformation and loading fact table</br>
+
+## Repository Structure
+The following files define the project: </br>
+<ul>
+  <li>notebooks                        # Notebooks folder
+    <ul>
+      <li>Create_Cluster.ipynb</li>    # Create AWS Cluster
+    </ul>
+  </li>
+  <li>scripts                          # scripts folder
+    <ul>
+      <li>create_tables.py</li>        # script that efectively drops and creates the table sctructure in the AWS Cluster
+      <li>dwh.cfg</li>                 # file that contains all the configurations needed to connect to the AWS cluster and S3 bucket
+      <li>etl.py</li>                  # Main script that cleans all tables, loads the  staging tables and applies the transformations for the dimension and fact tables
+       <li>README.md</li>              # File that contains the description of the project
+       <li>sql_queries.py</li>         # File that contains the definition for the cleaning, staging loading and final tables transformation and loading.
+    </ul>
+  </li>
+  <li>Fourth item</li>
+</ul>
