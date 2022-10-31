@@ -106,12 +106,12 @@ Next is made some analysis over the new created model.
 
 ### Users that listens more songs
 <code>
-%%sql
-select u.first_name + ' ' + u.last_name as Username, count(distinct s.title)
-from songplays p
-join users u on p.user_id=u.user_id
-join songs s on p.song_id=s.song_id
-group by u.first_name , u.last_name
-order by 2 desc
-limit 10
+%%sql </br>
+select u.first_name + ' ' + u.last_name as Username, count(distinct s.title)</br>
+from songplays p</br>
+join users u on p.user_id=u.user_id</br>
+join songs s on p.song_id=s.song_id</br>
+group by u.first_name , u.last_name</br>
+order by 2 desc</br>
+limit 10</br>
 </code>
