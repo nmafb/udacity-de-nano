@@ -40,5 +40,15 @@ Defined data structure for DWH analysis:
 ![image](https://user-images.githubusercontent.com/24605851/198902913-ac0d5a59-1438-4824-884c-92e73cc24bf5.png)
 
 ### Fact Table
+<code>songplays</code> - Records in event data associated with song plays i.e. records with page <code>NextSong</code></br>
+<code>songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent</code>
 
-
+### Dimension Tables
+<code>users</code> - users in the app
+<code>user_id, first_name, last_name, gender, level</code>
+<code>songs</code> - songs in music database
+<code>song_id, title, artist_id, year, duration</code>
+<code>artists</code> - artists in music database
+<code>artist_id, name, location, lattitude, longitude</code>
+<code>time</code> - timestamps of records in songplays broken down into specific units
+<code>start_time, hour, day, week, month, year, weekday</code>
