@@ -105,12 +105,15 @@ For this project it was created an AWS IAM User and Role:
 Next is made some analysis over the new created model.
 
 ### Users that listens more songs
-%%sql </br>
-select u.first_name + ' ' + u.last_name as Username, count(distinct s.title)</br>
-from songplays p</br>
-join users u on p.user_id=u.user_id</br>
-join songs s on p.song_id=s.song_id</br>
-group by u.first_name , u.last_name</br>
-order by 2 desc</br>
-limit 10</br>
+![image](https://user-images.githubusercontent.com/24605851/198988655-304cd9fb-4781-4221-9c6a-710476ccc6cb.png)
 
+
+### Most played songs by User
+![image](https://user-images.githubusercontent.com/24605851/198988773-82cdc5bd-b4b6-43d9-9877-1eea1367996f.png)
+
+### Most played Artist by User
+![image](https://user-images.githubusercontent.com/24605851/198988864-6d42b018-1004-424c-92cd-730a957d55ef.png)
+
+
+
+## Create a AWS Redshift Cluster IAM User/Role
