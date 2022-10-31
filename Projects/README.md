@@ -63,9 +63,10 @@ The ETL is defined in 3 stages:
 * Fact loading - transformation and load of fact table.
 
 ### Pipeline
-0 - Creation of the AWS cluster with the python notebook, assuming that already exists a cluster</br>
-<code>Create_Cluster.ipynb</code></br>
 <code>
-   1 - Creation of the tables structure - Staging, Dimensions and Fact tables </br>
-   2 - Loading of the staging tables
+   1 - Creation of the AWS cluster with the python notebook. This step imitates the assumption that already exists a cluster</br>
+   2 - Creation of the tables structure - Staging, Dimensions and Fact tables </br>
+   3 - Loading of the staging tables from AWS S3 bucket</br>
+   4 - Data transformation and loading dimension tables</br>
+   5 - Data transformation and loading fact table
 </code>
