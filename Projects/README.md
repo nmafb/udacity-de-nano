@@ -91,7 +91,7 @@ The following files define the project: </br>
 ## Create a AWS Redshift Cluster IAM User/Role
 
 This step is very important, as we need it to interact with the AWS Account. 
-It is necessary to edit the <code>dwh.cgf</code> file with your admin credentials from the AWS account.
+It is necessary to edit the <code>dwh.cgf</code> file with the admin credentials from the AWS account.
 
 For this project it was created an AWS IAM User and Role:
 1. Create IAM user (dwhuser)
