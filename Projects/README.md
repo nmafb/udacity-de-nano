@@ -44,11 +44,11 @@ Defined data structure for DWH analysis:
 <code>songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent</code>
 
 ### Dimension Tables
-<code>users</code> - users in the app
-<code>user_id, first_name, last_name, gender, level</code>
-<code>songs</code> - songs in music database
-<code>song_id, title, artist_id, year, duration</code>
-<code>artists</code> - artists in music database
-<code>artist_id, name, location, lattitude, longitude</code>
-<code>time</code> - timestamps of records in songplays broken down into specific units
-<code>start_time, hour, day, week, month, year, weekday</code>
+<code>users</code> - users in the app</br>
+* <code>user_id, first_name, last_name, gender, level</code></br>
+<code>songs</code> - songs in music database</br>
+* <code>song_id, title, artist_id, year, duration</code></br>
+<code>artists</code> - artists in music database</br>
+* <code>artist_id, name, location, lattitude, longitude</code></br>
+<code>time</code> - timestamps of records in songplays broken down into specific units</br>
+* <code>start_time, hour, day, week, month, year, weekday</code></br>
