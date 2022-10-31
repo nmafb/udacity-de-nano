@@ -64,10 +64,13 @@ The ETL is defined in 3 stages:
 
 ### Pipeline
    1 - Creation of the AWS cluster with the python notebook. This step imitates the assumption that already exists a cluster</br>
+   <code>./notebooks/Create_Cluster.ipynb</code>
    2 - Creation of the tables structure - Staging, Dimensions and Fact tables </br>
-   3 - Loading of the staging tables from AWS S3 bucket</br>
-   4 - Data transformation and loading dimension tables</br>
-   5 - Data transformation and loading fact table</br>
+   <code>./scripts/create_tables.py</code>
+   3.1 - Loading of the staging tables from AWS S3 bucket</br>
+   3.2 - Data transformation and loading dimension tables</br>
+   3.3 - Data transformation and loading fact table</br>
+   <code>./scripts/etl.py</code>
 
 ## Repository Structure
 The following files define the project: </br>
