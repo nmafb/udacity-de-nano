@@ -56,61 +56,20 @@ Defined data structure for DWH analysis:
 <code>time</code> - timestamps of records in songplays broken down into specific units</br>
 * <code>start_time, hour, day, week, month, year, weekday</code></br>
 
-## ETL
-The ETL is defined in 3 stages:
-* Staging      - load of staging tables - <code>staging events</code> &nbsp; <code>staging songs</code>
-* Dimension    - trasformation and load of dimensions tables.
-* Fact loading - transformation and load of fact table.
+## ELT
+The ELT reads data from S3, processes that data using Spark, and writes them back to S3  
+   * etl.py
+   * dl.cfg
 
-### Pipeline
-   1 - Creation of the AWS cluster with the python notebook. This step imitates the assumption that already exists a cluster</br>
-   <code>./notebooks/Create_Cluster.ipynb</code></br>
-   2 - Creation of the tables structure - Staging, Dimensions and Fact tables </br>
-   <code>./scripts/create_tables.py</code></br>
-   3.1 - Loading of the staging tables from AWS S3 bucket</br>
-   3.2 - Data transformation and loading dimension tables</br>
-   3.3 - Data transformation and loading fact table</br>
-   <code>./scripts/etl.py</code></br>
+## Notebook
+   * test-emr.ipynb
 
 ## Repository Structure
 The following files define the project: </br>
 <ul>
-  <li>notebooks                        # Notebooks folder
-    <ul>
-      <li>Create_Cluster.ipynb</li>    # Create AWS Cluster
-       <li>Sparkify_Analysis.ipynb</li> # Create AWS Cluster
-    </ul>
-  </li>
-  <li>scripts                          # scripts folder
-    <ul>
-      <li>create_tables.py</li>        # script that efectively drops and creates the table sctructure in the AWS Cluster
-      <li>dwh.cfg</li>                 # file that contains all the configurations needed to connect to the AWS cluster and S3 bucket
-      <li>etl.py</li>                  # Main script that cleans all tables, loads the  staging tables and applies the transformations for the dimension and fact tables
-       <li>README.md</li>              # File that contains the description of the project
-       <li>sql_queries.py</li>         # File that contains the SQL definition for the cleaning, staging loading and final tables transformation and loading.
-    </ul>
-  </li>
+  <li>etl.py                        # Notebooks folder </li>
+  <li>test-emr.ipynb                # scripts folder </li>\
+  <li>dl.cgf</li>
+  <li>README.md </li>
 </ul>
-
-## Create a AWS Redshift Cluster IAM User/Role
-
-This step is very important, as we need it to interact with the AWS Account. 
-It is necessary to edit the <code>dwh.cgf</code> file with the admin credentials from the AWS account.
-
-For this project it was created an AWS IAM User and Role:
-1. Create IAM user (dwhuser)
-2. Create IAM role (dwhRole) with AmazonS3ReadOnlyAccess access rights
-
-# Sparkify Analysis
-Next is made some analysis over the new created model.
-
-### Users that listens more songs
-![image](https://user-images.githubusercontent.com/24605851/198988655-304cd9fb-4781-4221-9c6a-710476ccc6cb.png)
-
-
-### Most played songs by User
-![image](https://user-images.githubusercontent.com/24605851/198988773-82cdc5bd-b4b6-43d9-9877-1eea1367996f.png)
-
-### Most played Artist by User
-![image](https://user-images.githubusercontent.com/24605851/198988864-6d42b018-1004-424c-92cd-730a957d55ef.png)
 
