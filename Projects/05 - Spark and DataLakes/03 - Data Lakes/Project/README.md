@@ -68,7 +68,7 @@ The ELT reads data from S3, processes that data using Spark, and writes them bac
 The following files define the project: </br>
 <ul>
   <li>etl.py                        # Notebooks folder </li>
-  <li>test-emr.ipynb                # scripts folder </li>\
+  <li>test-emr.ipynb                # scripts folder </li>
   <li>dl.cgf</li>
   <li>README.md </li>
 </ul>
