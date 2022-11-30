@@ -1,9 +1,15 @@
 import configparser
 from datetime import datetime
 import os
+import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf, col
 from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, date_format
+from pyspark.sql import functions as F
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+from pyspark.sql.types import TimestampType
+from pyspark.sql.types import TimestampType as TimeStamp
 
 
 
@@ -40,16 +46,17 @@ def process_song_data(spark, input_data, output_data):
     """
 
     # get filepath to song data file
+    print('input_date: {}', input_data)
     song_data = os.path.join(input_data, 'song_data/*/*/*/*.json')
-    
+
     # read song data file
     df = spark.read.json(song_data)
 
     # extract columns to create songs table
     songs_table = df['song_id', 'title', 'artist_id', 'year', 'duration']
-    
+
     # write songs table to parquet files partitioned by year and artist
-    
+
     songs_path = os.path.join(output_data, 'songs')
     songs_table.withColumn('_year', df.year).withColumn('_artist_id', df.artist_id) \
     .write.partitionBy(['_year', '_artist_id']) \
@@ -58,7 +65,7 @@ def process_song_data(spark, input_data, output_data):
     # extract columns to create artists table
     artists_table = df['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']
     artists_table = artists_table.drop_duplicates(subset=['artist_id'])
-    
+
     # write artists table to parquet files
     artists_path = os.path.join(output_data, 'artists')
     artists_table.write.parquet(artists_path, mode='overwrite')
@@ -175,9 +182,12 @@ def main():
 
     # Create Spark Session
     spark = create_spark_session()
+
+    song_data = os.path.join(input_data, 'song_data/*/*/*/*.json')
+    df = spark.read.json(song_data)
     
     # Process Song and Log data
-    process_song_data(spark, input_data, output_data)    
+    process_song_data(spark, input_data, output_data)
     process_log_data(spark, input_data, output_data)
 
 
