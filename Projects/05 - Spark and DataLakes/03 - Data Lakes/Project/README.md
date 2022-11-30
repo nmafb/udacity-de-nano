@@ -75,4 +75,7 @@ The following files define the project: </br>
   <li>test-emr.ipynb               # EMR Python Notebook file </li>
 </ul>
 
+# How to use the Repository
+## Clone repository
+
 
