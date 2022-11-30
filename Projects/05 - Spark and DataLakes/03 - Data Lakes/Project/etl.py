@@ -8,6 +8,15 @@ from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, dat
 
 
 def create_spark_session():
+    """
+        This Function:
+            - Creates an Spark Session based on the configurations
+        Args:
+            - None
+        Returns:
+            - spark (object): An activate local Spark Session
+    """
+
     spark = SparkSession \
         .builder \
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -17,23 +26,34 @@ def create_spark_session():
 
 def process_song_data(spark, input_data, output_data):
 
+    """
+    This function:
+        - Create songs and artists tables from data in S3 Bucket
+        - Process it to load songs and artists tables
+        - Write to partitioned parquet files on S3
+    Args:
+        - param: spark (spark.session): An active local Spark session
+        - param: input_data (string): S3 bucket with input data
+        - param: output_data (string): S3 bucket to store output tables (parquet files)
+    Returns:
+        - None
+    """
+
     # get filepath to song data file
     song_data = os.path.join(input_data, 'song_data/*/*/*/*.json')
     
     # read song data file
-    ## df = spark.read.json(song_data)
-    df = spark.read.json("s3a://{}:{}@udacity-dend/song_data/*/*/*/*.json".format(os.environ['AWS_ACCESS_KEY_ID'],os.environ['AWS_SECRET_ACCESS_KEY']))
+    df = spark.read.json(song_data)
 
     # extract columns to create songs table
     songs_table = df['song_id', 'title', 'artist_id', 'year', 'duration']
     
     # write songs table to parquet files partitioned by year and artist
     
-    #songs_path = os.path.join(output_data, 'songs')
+    songs_path = os.path.join(output_data, 'songs')
     songs_table.withColumn('_year', df.year).withColumn('_artist_id', df.artist_id) \
-    .write.partitionBy(['_year', '_artist_id'])\
-    .parquet("s3a://{}:{}@aws-emr-resources-234719590191-us-east-1/udacity-data-lake/songs".format(os.environ['AWS_ACCESS_KEY_ID'],os.environ['AWS_SECRET_ACCESS_KEY']), mode='overwrite')
-    #.parquet(songs_path, mode='overwrite')
+    .write.partitionBy(['_year', '_artist_id']) \
+    .parquet(songs_path, mode='overwrite')
 
     # extract columns to create artists table
     artists_table = df['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']
@@ -45,13 +65,24 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
+    """
+    This Function:
+        - Create users, time and songplay tables from data in S3 Bucket
+        - Write to partitioned parquet files on S3
+    Args:
+        - param: spark (object session): An active Spark session
+        - param: input_data (string): S3 bucket with input data
+        - param: output_data (string): S3 bucket to store output tables
+    Returns:
+        - None
+    """
+
     # get filepath to log data file
     log_data = os.path.join(input_data, 'log_data/*/*/*.json')
 
     # read log data file
     df = spark.read.json(log_data)
-    #df = spark.read.json("s3a://{}:{}@udacity-dend/log_data/*/*/*.json".format(os.environ['AWS_ACCESS_KEY_ID'],os.environ['AWS_SECRET_ACCESS_KEY']))
-    
+
     # filter by actions for song plays
     df = df.filter(df.page == 'NextSong')
 
@@ -92,7 +123,6 @@ def process_log_data(spark, input_data, output_data):
     # write time table to parquet files partitioned by year and month
     time_path = os.path.join(output_data, 'time')
     time_table.write.partitionBy(['year', 'month']).parquet(time_path, mode='overwrite')
-    #.parquet("s3a://{}:{}@aws-emr-resources-234719590191-us-east-1/udacity-data-lake/time".format(os.environ['AWS_ACCESS_KEY_ID'],os.environ['AWS_SECRET_ACCESS_KEY']), mode='overwrite')
 
     # read in song data to use for songplays table
     song_path = os.path.join(output_data, 'songs/_year=*/_artist_id=*/*.parquet')
@@ -122,6 +152,17 @@ def process_log_data(spark, input_data, output_data):
 
 
 def main():
+    """
+        Main:
+            - Extract songs and events data from S3
+            - Transform it into tables
+            - Load it back to S3 in Parquet format
+        Args:
+            - None
+        Returns:
+            - None
+    """
+
     # Get Local Configuration
     config = configparser.ConfigParser()
     config.read('dl.cfg')
