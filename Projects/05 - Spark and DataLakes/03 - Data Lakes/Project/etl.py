@@ -93,10 +93,10 @@ def process_log_data(spark, input_data, output_data):
     # filter by actions for song plays
     df = df.filter(df.page == 'NextSong')
 
-    # extract columns for users table    
+    # extract columns for users table
     users_table = df['userId', 'firstName', 'lastName', 'gender', 'level']
     users_table = users_table.drop_duplicates(subset=['userId'])
-    
+
     # write users table to parquet files
     users_path = os.path.join(output_data, 'users')
     users_table.write.parquet(users_path, mode='overwrite')
@@ -107,14 +107,14 @@ def process_log_data(spark, input_data, output_data):
         TimestampType()
     )
     df = df.withColumn("timestamp", get_timestamp(df.ts))
-    
+
     # create datetime column from original timestamp column
     get_datetime = udf(
         lambda x: datetime.fromtimestamp(x / 1000).replace(microsecond=0),
         TimestampType()
     )
     df = df.withColumn("newdatetime", get_datetime(df.ts))
-    
+
     # extract columns to create time table
     time_table = df.select(
         F.col('newdatetime').alias('start_time'),
@@ -126,7 +126,7 @@ def process_log_data(spark, input_data, output_data):
         F.date_format('newdatetime', 'u').alias('weekday')
     )
     time_table = time_table.drop_duplicates(subset=['start_time'])
-    
+
     # write time table to parquet files partitioned by year and month
     time_path = os.path.join(output_data, 'time')
     time_table.write.partitionBy(['year', 'month']).parquet(time_path, mode='overwrite')
@@ -135,10 +135,10 @@ def process_log_data(spark, input_data, output_data):
     song_path = os.path.join(output_data, 'songs/_year=*/_artist_id=*/*.parquet')
     song_df = spark.read.parquet(song_path)
 
-    # extract columns from joined song and log datasets to create songplays table 
+    # extract columns from joined song and log datasets to create songplays table
     df = df['datetime', 'userId', 'level', 'song', 'artist', 'sessionId', 'location', 'userAgent']
     log_song_df = df.join(song_df, df.song == song_df.title)
-    
+
     songplays_table = log_song_df.select(
         F.monotonically_increasing_id().alias('songplay_id'),
         F.col('newdatetime').alias('start_time'),
@@ -176,7 +176,7 @@ def main():
 
     os.environ['AWS_ACCESS_KEY_ID'] = config['AWS']['AWS_ACCESS_KEY_ID']
     os.environ['AWS_SECRET_ACCESS_KEY'] = config['AWS']['AWS_SECRET_ACCESS_KEY']
-    
+
     input_data = config['DATALAKE']['input_data']
     output_data = config['DATALAKE']['output_data']
 
@@ -185,7 +185,7 @@ def main():
 
     song_data = os.path.join(input_data, 'song_data/*/*/*/*.json')
     df = spark.read.json(song_data)
-    
+
     # Process Song and Log data
     process_song_data(spark, input_data, output_data)
     process_log_data(spark, input_data, output_data)
@@ -193,3 +193,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
